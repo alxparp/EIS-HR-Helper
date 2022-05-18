@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="1" author="stud-ydiska">
+        <comment>create table Roles</comment>
+        <createTable tableName="Roles">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="stud-ydiska">
+        <comment>create table Users</comment>
+        <createTable tableName="Users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="firstName" type="varchar(30)"/>
+            <column name="lastName" type="varchar(30)"/>
+            <column name="email" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="roleId" type="int">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Users_Roles"
+                             references="Roles(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="stud-ydiska">
+        <comment>create table OauthClients for oauth2</comment>
+        <createTable tableName="OauthClients">
+            <column name="id" type="varchar(256)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="clientSecret" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scope" type="varchar(256)"/>
+            <column name="grantType" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="redirectUrl" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_OauthClients_Users"
+                             references="Users(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="stud-ydiska">
+        <comment>create table OauthTokens for oauth2</comment>
+        <createTable tableName="OauthTokens">
+            <column name="id" type="varchar(256)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="accessToken" type="longvarbinary">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expires" type="timestamp"/>
+            <column name="clientId" type="varchar(256)">
+                <constraints nullable="false"
+                             foreignKeyName="FK_OauthTokens_OauthClients"
+                             references="OauthClients(id)"/>
+            </column>
+            <column name="refreshToken" type="longvarbinary">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5" author="stud-ydiska">
+        <comment>create table OauthAuthorizationCodes for oauth2</comment>
+        <createTable tableName="OauthAuthorizationCodes">
+            <column name="code" type="varchar(256)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="clientId" type="varchar(256)">
+                <constraints nullable="false"
+                             foreignKeyName="FK_OauthCodes_OauthClients"
+                             references="OauthClients(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="6" author="stud-ydiska">
+        <dropColumn tableName="Users" columnName="roleId"/>
+    </changeSet>
+
+    <changeSet id="7" author="stud-ydiska">
+        <createTable tableName="UsersRoles">
+            <column name="userId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Roles_Users"
+                             references="Users(id)"/>
+            </column>
+            <column name="roleId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Users_Roles"
+                             references="Roles(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="8" author="stud-ydiska">
+        <addPrimaryKey
+                columnNames="userId, roleId"
+                constraintName="PK_Users_Roles"
+                tableName="UsersRoles"/>
+    </changeSet>
+
+    <changeSet id="9" author="stud-ydiska">
+        <addColumn tableName="Users">
+            <column name="enabled" type="boolean"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="10" author="stud-ydiska">
+        <insert tableName="Roles">
+            <column name="name" value="Demo user"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

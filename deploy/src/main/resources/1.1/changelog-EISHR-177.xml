@@ -1,0 +1,210 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <!--TemplateTypes-->
+    <changeSet id="1" author="stud-oparpalak">
+        <comment>EISHR-177, EISHR-220: Create liquibase script for letters, created table TemplateTypes</comment>
+        <createTable tableName="TemplateTypes">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_TemplateTypes"/>
+            </column>
+            <column name="templateName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--Statuses-->
+    <changeSet id="2" author="stud-oparpalak">
+        <comment>EISHR-177, EISHR-220: Create liquibase script for letters, created table Statuses</comment>
+        <createTable tableName="Statuses">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Statuses"/>
+            </column>
+            <column name="statusName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--Countries-->
+    <changeSet id="3" author="stud-oparpalak">
+        <comment>EISHR-177, EISHR-220: Create liquibase script for letters, created table Countries</comment>
+        <createTable tableName="Countries">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Countries"/>
+            </column>
+            <column name="countryName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--Locations-->
+    <changeSet id="4" author="stud-oparpalak">
+        <comment>EISHR-177, EISHR-220: Create liquibase script for letters, created table Locations</comment>
+        <createTable tableName="Locations">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Locations"/>
+            </column>
+            <column name="cityName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="countryId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Locations_Countries"
+                             references="Countries(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--Employees-->
+    <changeSet id="5" author="stud-oparpalak">
+        <comment>EISHR-177, EISHR-220: Create liquibase script for letters, created table Employees</comment>
+        <createTable tableName="Employees">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Employees"/>
+            </column>
+            <column name="firstName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lastName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hireDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birthDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locationId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Employees_Locations"
+                             references="Locations(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--Letters-->
+    <changeSet id="6" author="stud-oparpalak">
+        <comment>EISHR-177, EISHR-220: Create liquibase script for letters, created table Letters</comment>
+        <createTable tableName="Letters">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Letters"/>
+            </column>
+            <column name="employeeId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Letters_Employees"
+                             references="Employees(id)"/>
+            </column>
+            <column name="statusId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Letters_Statuses"
+                             references="Statuses(id)"/>
+            </column>
+            <column name="templateTypeId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Letters_TemplateTypes"
+                             references="TemplateTypes(id)"/>
+            </column>
+            <column name="content" type="varchar(2000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dueDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--VacationTypes-->
+    <changeSet id="7" author="stud-oparpalak">
+        <comment>EISHR-177, EISHR-197: Create liquibase script for letters, created table VacationTypes</comment>
+        <createTable tableName="VacationTypes">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_VacationTypes"/>
+            </column>
+            <column name="vacationName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--Vacations-->
+    <changeSet id="8" author="stud-oparpalak">
+        <comment>EISHR-177, EISHR-197: Create liquibase script for letters, created table Vacations</comment>
+        <createTable tableName="Vacations">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Vacations"/>
+            </column>
+            <column name="vacationName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="startDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="countDays" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vacationTypeId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Vacations_VacationTypes"
+                             references="VacationTypes(id)"/>
+            </column>
+            <column name="employeeId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Vacations_Employees"
+                             references="Employees(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--Jobs-->
+    <changeSet id="18" author="stud-vmartsun">
+        <comment>EISHR-177, EISHR-246: Create liquibase scripts for creating and filling table 'Jobs'</comment>
+        <createTable tableName="Jobs">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_Jobs"/>
+            </column>
+            <column name="jobName" type="varchar(255)">
+                <constraints unique="true" uniqueConstraintName="UDX_Jobs" nullable="false"/>
+            </column>
+            <column name="executionCount" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <!--Filling Jobs table-->
+    <changeSet id="19" author="stud-vmartsun">
+        <insert tableName="Jobs">
+            <column name="jobName" value="generateBirthdayDraftJob"/>
+            <column name="executionCount" value="0"/>
+        </insert>
+        <insert tableName="Jobs">
+            <column name="jobName" value="generateAnniversaryDraftJob"/>
+            <column name="executionCount" value="0"/>
+        </insert>
+        <insert tableName="Jobs">
+            <column name="jobName" value="generateNewComerDraftJob"/>
+            <column name="executionCount" value="0"/>
+        </insert>
+        <insert tableName="Jobs">
+            <column name="jobName" value="generatePromotionDraftJob"/>
+            <column name="executionCount" value="0"/>
+        </insert>
+        <insert tableName="Jobs">
+            <column name="jobName" value="generateVacationDraftJob"/>
+            <column name="executionCount" value="0"/>
+        </insert>
+        <insert tableName="Jobs">
+            <column name="jobName" value="generateInvoiceDraftJob"/>
+            <column name="executionCount" value="0"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

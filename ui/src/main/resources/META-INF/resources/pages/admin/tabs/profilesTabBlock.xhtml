@@ -1,0 +1,49 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:tab id="tabProfiles" title="Profiles">
+        <f:event type="preRenderComponent"
+                 listener="#{adminProfileController.adminFormRenderEventListener}"/>
+        <h:panelGrid columns="1" cellpadding="10">
+            <!--include search part-->
+            <ui:include src="../parts/searchProfileAdmin.xhtml"/>
+            <!--include table part-->
+            <ui:include src="../parts/tableProfileAdmin.xhtml"/>
+        </h:panelGrid>
+
+    </p:tab>
+    <p:tab title="Roles">
+        <p:outputLabel value="Available Roles"/>
+        <p:dataTable var="role" value="#{roleController.roleDTOS}">
+            <p:column headerText="Name" style="text-align:left">
+                <p:outputLabel id="roleName" value="#{role.name}"/>
+            </p:column>
+            <p:column headerText="Action" width="30%" style="text-align:left">
+                <p:commandButton id="viewPrivileges" value="View Privileges" update="widget"
+                                 oncomplete="PF('viewDialog').show();">
+                    <f:setPropertyActionListener value="#{role}"
+                                                 target="#{roleController.selected}"/>
+                </p:commandButton>
+                <p:commandButton id="editRole" value="Edit" action="editRole"/>
+
+                <p:dialog widgetVar="viewDialog" header="#{roleController.selected.name}" dynamic="true"
+                          id="widget"
+                          closable="false" resizable="false" width="50%">
+                    <p:outputLabel value="Privileges"/>
+                    <h:panelGrid columns="1" cellpadding="10" id="info">
+                        <p:dataList var="privilege" lazy="true"
+                                    scrollable="true"
+                                    value="#{roleController.selected.privilegeDTOS}">
+                            #{privilege.name}
+                        </p:dataList>
+                        <p:commandButton id="closeDialog" value="Close"
+                                         onclick="PF('viewDialog').hide();"/>
+                    </h:panelGrid>
+                </p:dialog>
+            </p:column>
+        </p:dataTable>
+        <p:commandButton style="margin: 2% auto 0 auto;display: block;" id="addNewRole" value="Add New Role"/>
+    </p:tab>
+</ui:composition>

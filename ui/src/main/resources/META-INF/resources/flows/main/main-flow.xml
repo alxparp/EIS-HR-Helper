@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+    <view-state id="mainPage" view="/pages/main.xhtml">
+        <transition on="goToAdmin" to="adminMainPage"/>
+        <transition on="goToTemplates" to="templatePage"/>
+    </view-state>
+
+    <view-state id="adminMainPage" view="externalRedirect:../app/adminProfiles"/>
+
+    <view-state id="templatePage" view="/pages/templates.xhtml">
+        <var name="selected" class="com.od.eisgroup.domain.dto.TemplateDTO"/>
+        <transition on="editTemplate">
+            <set name="selected" value="templateController.selected"/>
+        </transition>
+        <transition on="addNewTemplate">
+            <set name="selected" value="new com.od.eisgroup.domain.dto.TemplateDTO()"/>
+            <set name="selected.templateType" value="templateController.selectedTemplateType"/>
+        </transition>
+        <transition on="add">
+            <evaluate expression="templateController.addTemplate(selected)"/>
+            <evaluate expression="templateController.init()"/>
+        </transition>
+        <transition on="update">
+            <evaluate expression="templateController.updateTemplate(selected)"/>
+            <evaluate expression="templateController.init()"/>
+        </transition>
+        <transition on="removeTemplate">
+            <set name="selected" value="templateController.selected"/>
+            <evaluate expression="templateController.remove(selected)"/>
+            <evaluate expression="templateController.init()"/>
+        </transition>
+        <transition on="refresh">
+            <evaluate expression="templateController.init()"/>
+        </transition>
+        <transition on="goToAdmin" to="adminMainPage"/>
+        <transition on="backToMain" to="mainPage"/>
+    </view-state>
+
+</flow>

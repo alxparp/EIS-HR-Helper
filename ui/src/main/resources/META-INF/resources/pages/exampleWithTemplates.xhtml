@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/template.xhtml">
+
+    <ui:define name="windowTitle">Test title</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <!--Insert your code instead of line below-->
+            <p:outputLabel>Test content</p:outputLabel>
+            <!--Flow test-->
+            <p:commandButton action="goToMain" value="Main"/>
+            <p:separator/>
+            <p:commandButton action="goToAdmin" value="Admin"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

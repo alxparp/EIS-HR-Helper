@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="1" author="stud-dosipov">
+        <preConditions onFail="WARN">
+            <tableExists tableName="Users"/>
+            <not>
+                <columnExists tableName="Users" columnName="status"/>
+            </not>
+        </preConditions>
+
+        <comment>EISHR28, EISHR-213: Adding a status column to Users table</comment>
+
+        <addColumn tableName="Users">
+            <column name="status" type="varchar(50)" defaultValue="AVAILABLE">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

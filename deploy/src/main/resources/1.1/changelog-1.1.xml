@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <include file="1.1/changelog-EISHR-10.xml"/>
+    <include file="1.1/changelog-EISHR-177.xml"/>
+    <include file="1.1/changelog-EISHR-40.xml"/>
+    <include file="1.1/changelog-EISHR-165.xml"/>
+    <include file="1.1/changelog-EISHR-171.xml"/>
+    <include file="1.1/changelog-EISHR-28.xml"/>
+
+</databaseChangeLog>

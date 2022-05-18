@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+
+    <h:head>
+        <title>EIS Portal Homepage</title>
+    </h:head>
+
+    <h:body>
+        <h1>Welcome!</h1>
+        <h:form>
+            <p:panel header="Current date and time:">
+                <h3>
+                    <p:outputLabel>#{timeManagerBean.currentTime}</p:outputLabel>
+                    <br/>
+                    <p:outputLabel>This is pages/index.xhtml in ui module</p:outputLabel>
+                </h3>
+            </p:panel>
+        </h:form>
+    </h:body>
+
+</f:view>
+
+</html>

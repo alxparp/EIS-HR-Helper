@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="1" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-206: Create table Privileges.</comment>
+        <createTable tableName="Privileges">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-206: Create table Roles _Privileges.</comment>
+        <createTable tableName="RolesPrivileges">
+            <column name="roleId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Roles_Privileges"
+                             references="Roles(id)"/>
+            </column>
+            <column name="privilegeId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Privileges_Roles"
+                             references="Privileges(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-206: Add Primary Key constraint for Roles _Privileges.</comment>
+        <addPrimaryKey
+                columnNames="roleId, privilegeId"
+                constraintName="PK_Roles_Privileges"
+                tableName="RolesPrivileges"/>
+    </changeSet>
+
+    <changeSet id="4" author="stud-ydiska">
+        <insert tableName="Privileges">
+            <column name="name" value="Main application access"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="5" author="stud-ydiska">
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="1"/>
+            <column name="privilegeId" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="6" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Admin application access</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="7" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Delete user</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="8" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Update user</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="9" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Assign role</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="10" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Edit role</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="11" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Delete role</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="12" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Edit draft and reminder</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="13" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Approve draft and reminder</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="14" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Cancel draft and reminder</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="15" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Select Location</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="16" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">View sent letters and reminders</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="17" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">View delayed drafts and reminders</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="18" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Create New Letter</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="19" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Create New Reminder</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Privileges">
+            <column name="name">Add/Edit/Remove Templates</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="21" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Roles">
+            <column name="name" value="Admin"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="22" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Roles">
+            <column name="name" value="HR manager"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="23" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="Roles">
+            <column name="name" value="HR specialist"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="24" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="4"/>
+            <column name="privilegeId" value="2"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="25" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="4"/>
+            <column name="privilegeId" value="4"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="26" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="4"/>
+            <column name="privilegeId" value="8"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="27" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="4"/>
+            <column name="privilegeId" value="9"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="28" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="4"/>
+            <column name="privilegeId" value="10"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="29" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="4"/>
+            <column name="privilegeId" value="11"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="30" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="4"/>
+            <column name="privilegeId" value="12"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="31" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="4"/>
+            <column name="privilegeId" value="13"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="32" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="4"/>
+            <column name="privilegeId" value="14"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="33" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="4"/>
+            <column name="privilegeId" value="15"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="34" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="4"/>
+            <column name="privilegeId" value="16"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="35" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="3"/>
+            <column name="privilegeId" value="5"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="36" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="3"/>
+            <column name="privilegeId" value="6"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="37" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="3"/>
+            <column name="privilegeId" value="7"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="38" author="stud-aklochkova">
+        <comment>EISHR-40, EISHR-258: Create liquibase script to insert Privileges data</comment>
+        <insert tableName="RolesPrivileges">
+            <column name="roleId" value="2"/>
+            <column name="privilegeId" value="3"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

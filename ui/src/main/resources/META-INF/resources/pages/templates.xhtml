@@ -1,0 +1,124 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/template.xhtml">
+
+    <ui:define name="windowTitle">Templates</ui:define>
+
+    <ui:define name="header">
+        <ui:include src="../templates/templateMainHeader.xhtml"/>
+        <p:commandButton id="backToMain" title="Back" action="backToMain" styleClass="back_button"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:tabView id="templateTabs" var="templateType" value="#{templateController.templateTypeDTOS}"
+                       dynamic="true" cache="true">
+                <p:tab title="#{templateType.templateName}">
+                    <p:commandButton id="addNewTemplate" title="Add new template"
+                                     action="addNewTemplate"
+                                     styleClass="add_button" oncomplete="PF('dlg').show();">
+                        <f:setPropertyActionListener value="#{templateType}"
+                                                     target="#{templateController.selectedTemplateType}"/>
+                    </p:commandButton>
+
+                    <p:dataTable id="table" var="template"
+                                 value="#{templateController.filterTemplates(templateType.templateName)}"
+                                 rows="10"
+                                 rowIndexVar="index" paginator="true" paginatorAlwaysVisible="false"
+                                 paginatorPosition="bottom">
+                        <p:column headerText="#" width="5%">
+                            <p:outputLabel value="#{index+1}"/>
+                        </p:column>
+                        <p:column headerText="Name">
+                            <p:outputLabel value="#{template.templateType.templateName}"/>
+                        </p:column>
+                        <p:column headerText="Summary">
+                            <p:outputLabel value="#{template.summary}"/>
+                        </p:column>
+                        <p:column headerText="First Words">
+                            <p:outputLabel value="#{template.firstWords}"/>
+                        </p:column>
+                        <p:column headerText="Main Words">
+                            <p:outputLabel value="#{template.mainWords}"/>
+                        </p:column>
+                        <p:column headerText="Signature">
+                            <p:outputLabel value="#{template.signature}"/>
+                        </p:column>
+                        <p:column headerText="Action">
+                            <p:commandButton id="editTemplate" value="Edit"
+                                             oncomplete="PF('dlg').show();"
+                                             action="editTemplate" update="form">
+                                <f:setPropertyActionListener value="#{template}"
+                                                             target="#{templateController.selected}"/>
+                            </p:commandButton>
+                            <p:commandButton id="removeTemplate" value="Remove"
+                                             action="removeTemplate" update="form"
+                                             rendered="#{templateController.filterTemplates(templateType.templateName)
+                                             .size() gt 1}">
+                                <f:setPropertyActionListener value="#{template}"
+                                                             target="#{templateController.selected}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
+                </p:tab>
+            </p:tabView>
+            <p:dialog widgetVar="dlg" closable="false" dynamic="true" id="widget" fitViewport="true" modal="true">
+                <p:messages/>
+                <h:panelGrid id="addUpdatePanel" columns="2" cellpadding="20px">
+                    <p:outputLabel value="Summary: " for="summary"/>
+                    <p:inputTextarea id="summary" value="#{selected.summary}" required="true"
+                                     rows="3" cols="30" label="summary"
+                                     counter="display1" maxlength="255"
+                                     counterTemplate="{0} characters remaining." autoResize="false"/>
+                    <p:outputLabel styleClass="left-foot-note"/>
+                    <p:outputLabel id="display1" styleClass="foot-note"/>
+
+                    <p:outputLabel value="Salutation: " for="salutation"/>
+                    <p:inputTextarea id="salutation" value="#{selected.salutation}"
+                                     rows="3" cols="30" counter="display2" label="salutation"
+                                     maxlength="255" counterTemplate="{0} characters remaining."
+                                     autoResize="false"/>
+                    <p:outputLabel styleClass="left-foot-note"/>
+                    <p:outputLabel id="display2" styleClass="foot-note"/>
+
+                    <p:outputLabel value="First Words: " for="firstWords"/>
+                    <p:inputTextarea id="firstWords" value="#{selected.firstWords}" required="true"
+                                     rows="3" cols="30" counter="display3" maxlength="255" label="firstWords"
+                                     counterTemplate="{0} characters remaining." autoResize="false"/>
+                    <p:outputLabel styleClass="left-foot-note"/>
+                    <p:outputLabel id="display3" styleClass="foot-note"/>
+
+                    <p:outputLabel value="Main Words: " for="mainWords"/>
+                    <p:inputTextarea id="mainWords" value="#{selected.mainWords}" label="mainWords"
+                                     rows="3" cols="30" counter="display4" maxlength="255"
+                                     counterTemplate="{0} characters remaining." autoResize="false"/>
+                    <p:outputLabel styleClass="left-foot-note"/>
+                    <p:outputLabel id="display4" styleClass="foot-note"/>
+
+                    <p:outputLabel value="Signature: " for="signature"/>
+                    <p:inputTextarea id="signature" value="#{selected.signature}" required="true"
+                                     rows="3" cols="30" counter="display5" maxlength="255" label="signature"
+                                     counterTemplate="{0} characters remaining." autoResize="false"/>
+                    <p:outputLabel styleClass="left-foot-note"/>
+                    <p:outputLabel id="display5" styleClass="foot-note"/>
+
+                </h:panelGrid>
+                <p:commandButton id="addTemplate" title="Add/Update" rendered="#{selected.id == null}" update="form"
+                                 action="add" oncomplete="PF('dlg').hide();" validateClient="true"
+                                 styleClass="add_button"/>
+
+                <p:commandButton id="updateTemplate" title="Add/Update" rendered="#{selected.id != null}" update="form"
+                                 action="update" oncomplete="PF('dlg').hide();" validateClient="true"
+                                 styleClass="add_button"/>
+
+                <p:commandButton id="cancel" title="Cancel"
+                                 oncomplete="PF('dlg').hide();"
+                                 styleClass="add_button" style="margin: 10px 10px" update="form"/>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

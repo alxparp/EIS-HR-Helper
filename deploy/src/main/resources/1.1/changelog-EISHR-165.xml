@@ -1,0 +1,71 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="stud-aklochkova">
+        <comment>EISHR-165, EISHR-250: Create Entity, DTO and liquibase script for Templates</comment>
+        <createTable tableName="Templates">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Templates"/>
+            </column>
+            <column name="summary" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firstWords" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mainWords" type="varchar(255)"/>
+            <column name="signature" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="templateTypeId" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="FK_Templates_TemplateTypes"
+                             references="TemplateTypes(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="stud-aklochkova">
+        <comment>EISHR-165, EISHR-256: Create liquibase scripts to insert template types into database</comment>
+        <insert tableName="TemplateTypes">
+            <column name="templateName">Birthday</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="3" author="stud-aklochkova">
+        <comment>EISHR-165, EISHR-256: Create liquibase scripts to insert template types into database</comment>
+        <insert tableName="TemplateTypes">
+            <column name="templateName">Anniversary</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="4" author="stud-aklochkova">
+        <comment>EISHR-165, EISHR-256: Create liquibase scripts to insert template types into database</comment>
+        <insert tableName="TemplateTypes">
+            <column name="templateName">Invoice</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="5" author="stud-aklochkova">
+        <comment>EISHR-165, EISHR-256: Create liquibase scripts to insert template types into database</comment>
+        <insert tableName="TemplateTypes">
+            <column name="templateName">Newcomer</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="6" author="stud-aklochkova">
+        <comment>EISHR-165, EISHR-256: Create liquibase scripts to insert template types into database</comment>
+        <insert tableName="TemplateTypes">
+            <column name="templateName">Promotion</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="7" author="stud-aklochkova">
+        <comment>EISHR-165, EISHR-256: Create liquibase scripts to insert template types into database</comment>
+        <insert tableName="TemplateTypes">
+            <column name="templateName">Vacation</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

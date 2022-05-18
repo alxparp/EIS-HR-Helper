@@ -1,0 +1,22 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:panelGrid id="searchPanel">
+        <p:column>
+            <p:spacer width="10">
+                <p:inputText id="inputProfile" value="#{profileSearchController.searchName}">
+                    <p:ajax update="searchProfile" event="keyup"/>
+                    <f:validator validatorId="searchProfileValidator"/>
+                </p:inputText>
+            </p:spacer>
+            <p:commandButton value="Search" id="searchProfile" disabled="#{facesContext.validationFailed}"
+                             actionListener="#{profileSearchController.searchProfiles()}"
+                             update="adminPageForm:adminTabView:tableProfiles"/>
+        </p:column>
+        <p:column>
+            <p:messages id="messages" style="font-size: small">
+                <p:autoUpdate/>
+            </p:messages>
+            <p:message for="inputProfile"/>
+        </p:column>
+    </h:panelGrid>
+</ui:composition>

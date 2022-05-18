@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Locations</title>
+    <h:outputStylesheet library="resources" name="css/style.css"/>
+</h:head>
+
+<h:body>
+    <p:dialog id="locationDialog" widgetVar="locationDialog" modal="true" closable="false"
+              resizable="false" width="30%" showEffect="slide" hideEffect="slide" position="right top"
+              styleClass="locDialog">
+        <div class="locationDialogHeader">
+            <p>Select Location(s)</p>
+        </div>
+        <h:form id="locDialogForm">
+            <p:scrollPanel id="scrollPanel" styleClass="scrollPanel">
+
+                <!--CheckBox 'All'-->
+                <p:selectBooleanCheckbox value="#{locationController.allSelected}" itemLabel="All">
+                    <p:ajax listener="#{locationController.selectAll}"/>
+                </p:selectBooleanCheckbox>
+
+                <!--Location checkboxes-->
+                <p:selectManyCheckbox id="locations" value="#{locationController.selectedLocations}"
+                                      layout="pageDirection" columns="1">
+                    <f:selectItems value="#{locationController.locations}" var="location" itemLabel="#{location}"
+                                   itemValue="#{location}"/>
+                    <p:ajax listener="#{locationController.select}"/>
+                </p:selectManyCheckbox>
+
+            </p:scrollPanel>
+            <div class="ui-g">
+                <!--BRM025-->
+                <div class="ui-g-6">
+                    <p:commandButton id="cancelButton" value="Cancel" onclick="PF('locationDialog').hide();"
+                                     styleClass="locationDialogButton"/>
+                </div>
+                <!--BRM026, BRM027, BRM028-->
+                <div class="ui-g-6">
+                    <p:commandButton id="confirmButton" value="Confirm" styleClass="locationDialogButton"
+                                     actionListener="#{locationController.confirm}"
+                                     disabled="${locationController.confirmButtonDisabled}"/>
+                </div>
+            </div>
+        </h:form>
+    </p:dialog>
+</h:body>
+</html>
+

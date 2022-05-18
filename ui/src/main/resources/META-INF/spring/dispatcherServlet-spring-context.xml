@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:faces="http://www.springframework.org/schema/faces"
+             xsi:schemaLocation="http://www.springframework.org/schema/mvc
+             http://www.springframework.org/schema/mvc/spring-mvc.xsd
+             http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/faces
+             http://www.springframework.org/schema/faces/spring-faces.xsd">
+
+    <annotation-driven/>
+
+    <faces:resources/>
+
+    <beans:bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+        <beans:property name="flowRegistry" ref="flowRegistry"/>
+    </beans:bean>
+
+    <beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <beans:property name="viewClass" value="org.springframework.faces.mvc.JsfView"/>
+        <beans:property name="prefix" value="/pages/"/>
+        <beans:property name="suffix" value=".xhtml"/>
+    </beans:bean>
+
+    <beans:bean class="org.springframework.faces.webflow.JsfFlowHandlerAdapter">
+        <beans:property name="flowExecutor" ref="flowExecutor"/>
+    </beans:bean>
+</beans:beans>

@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/template.xhtml">
+
+    <ui:define name="windowTitle">Main</ui:define>
+
+    <ui:define name="header">
+        <ui:include src="../templates/templateMainHeader.xhtml"/>
+        <h:form>
+            <div class="header">
+                <div class="buttons">
+                    <h:form id="headerLeftCornerButtons">
+                        <!--BRM011-->
+                        <p:commandButton id="newLetterButton" styleClass="button" value="New Letter"/>
+                        <!--BRM013-->
+                        <p:commandButton id="newReminderButton" styleClass="button" value="New Reminder"/>
+                        <!--BRM015-->
+                        <p:commandButton id="templatesButton" styleClass="button" value="Templates"
+                                         action="goToTemplates"/>
+                    </h:form>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:tabView id="LetterTabs">
+                <p:tab title="Generated Drafts">
+                    <ui:include src="./generatedDraftsTab.xhtml"/>
+                </p:tab>
+                <p:tab title="Approved Letters and Reminders">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <h:outputText value="Approved Letters and Reminders someday..."/>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Send Letters and Remainders">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <h:outputText value="There will be Send Letters and Remainders someday..."/>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Delayed Drafts">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <h:outputText value="There will be Delayed Drafts someday..."/>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Cancelled drafts">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <h:outputText value="There will be Cancelled drafts someday..."/>
+                    </h:panelGrid>
+                </p:tab>
+            </p:tabView>
+        </h:form>
+    </ui:define>
+</ui:composition>

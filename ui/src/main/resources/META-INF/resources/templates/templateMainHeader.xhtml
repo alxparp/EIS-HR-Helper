@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form>
+        <div class="right_corner">
+            <ul>
+                <!--BRM009-->
+                <li>|
+                    <p:commandLink id="adminLink" action="goToAdmin">
+                        <h:outputText id="adminLabel" value="admin"/>
+                    </p:commandLink>
+                </li>
+                <!--BRM008-->
+                <li>|
+                    <p:commandLink id="locationLink" onclick="PF('locationDialog').show();">
+                        <h:outputText id="locationLabel" value="Location"/>
+                    </p:commandLink>
+                </li>
+                <!--BRM007-->
+                <li>|
+                    <p:commandLink id="logoutLink">
+                        <h:outputText id="logoutLabel" value="Log Out"/>
+                    </p:commandLink>
+                </li>
+                <!--BRM006-->
+                <li><p:outputLabel id="nameLabel" value="#{enteredUserController.fullName}"/></li>
+            </ul>
+        </div>
+
+    </h:form>
+</ui:composition>

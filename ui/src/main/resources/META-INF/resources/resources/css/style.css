@@ -1,0 +1,98 @@
+body {
+    background: #F5F7F8;
+}
+
+.header {
+    height: 35px;
+    background: #fff;
+    border: 1px solid #DADCDE;
+    padding: 15px;
+    margin: 0;
+}
+
+.buttons {
+    float: left;
+}
+
+.button {
+    border: 1px solid #CED0D4;
+    background: #F6F7F9;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    float: left;
+    margin-right: 20px !important;
+}
+
+.right_corner {
+    float: right;
+    padding: 15px;
+}
+
+.right_corner li {
+    display: inline-block;
+    float: right;
+    margin-left: 10px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+.right_corner li:last-child {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.right_corner li a {
+    color: #226BBA;
+}
+
+.right_corner li a:hover {
+    text-decoration: none;
+}
+
+.content {
+    margin: 20px auto;
+}
+
+.add_button {
+    padding: 10px;
+    margin: 0 0 20px;
+}
+
+.back_button {
+    margin: 20px 0 0 30px;
+}
+
+.foot-note {
+    color: darkgray;
+    font-size: 12px !important;
+}
+
+.left-foot-note {
+    padding-bottom: 40px !important;
+}
+
+/*Location dialog*/
+
+.scrollPanel {
+    width: 100%;
+    height: 80px;
+}
+
+.locDialog {
+    margin-top: 4%;
+    margin-right: 1%;
+
+}
+
+#locationDialog .ui-dialog-titlebar {
+    background-color: transparent;
+}
+
+.locationDialogHeader {
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.locationDialogButton {
+    width: 100%;
+}

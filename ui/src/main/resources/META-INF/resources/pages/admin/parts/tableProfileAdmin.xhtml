@@ -1,0 +1,31 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <p:dataTable id="tableProfiles"
+                 var="profile"
+                 value="#{adminProfileController.profiles}"
+                 paginator="true" paginatorPosition="bottom" rows="10"
+                 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink}">
+        <p:column headerText="First Name" id="firstNameProfile">
+            <h:outputText value="#{profile.firstName}"/>
+        </p:column>
+
+        <p:column headerText="Last Name" id="lastNameProfile">
+            <h:outputText value="#{profile.lastName}"/>
+        </p:column>
+
+        <p:column headerText="User Login" id="userLoginProfile">
+            <h:outputText value="#{adminProfileController.getUserLogin(profile)}"/>
+        </p:column>
+
+        <p:column headerText="Status" id="statusProfile">
+            <h:outputText value="#{profile.status.value}"/>
+        </p:column>
+
+        <p:column headerText="Action" id="aActionProfile" style="text-align:center">
+            <p:commandLink id="viewProfile" value="View"> </p:commandLink>
+            <h:outputText value=" | "/>
+            <p:commandLink id="updateProfile" value="Update"> </p:commandLink>
+        </p:column>
+    </p:dataTable>
+</ui:composition>
